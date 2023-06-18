@@ -1,0 +1,43 @@
+{% extends 'empcrud/base_django.html' %}
+{% block title %}Details of {{ ls.name }}{% endblock %}
+{% block body %}
+    <center>
+       <h1>Details of {{ ls.name }}</h1>
+    </center>
+    <div class="shadow p-4 mb-5 bg-body rounded" style="background-color: #ffffff;">
+        <form method="post" action="#">
+            {% csrf_token %}
+            <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <td align="center" scope="col"><b>Employee ID</b></td>
+                            <td align="center" scope="col"><b>Name</b></td>
+                            <td align="center" scope="col"><b>Position</b></td>
+                            <td align="center" scope="col"><b>Age</b></td>
+                            <td align="center" scope="col"><b>Photo</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td align="center">{{ ls.empid }}</td>
+                                <td align="center">{{ ls.name }}</a></td>
+                                <td align="center">{{ ls.position }}</td>
+                                <td align="center">{{ ls.age }}</td>
+                                {% if ls.emp_image %}
+                                <td align="center"><img src="{{ ls.emp_image.url }}" width="100"></td>
+                                {% else %}
+                                <td align="center">Not available</td>
+                                {% endif %}
+                            </tr>
+                    </tbody>
+            </table>
+            <center>
+                {% if user.is_superuser %}
+                <a href="{% url 'update' ls.empid %}"><button type="button" class="btn btn-outline-warning btn-sm">Update</button></a>
+                <a href="{% url 'delete' ls.empid %}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a>
+                {% endif %}
+                <a href="{% url 'view' %}"><button type="button" class="btn btn-outline-secondary btn-sm">Go back</button></a>
+            </center>
+        </form>
+    </div>
+{% endblock %}

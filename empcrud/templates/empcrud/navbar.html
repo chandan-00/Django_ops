@@ -1,0 +1,68 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/"><img src="{% static '/empcrud/images/office_logo.png' %} " width="150"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% if user.is_superuser %}
+      <li class="nav-item">
+        <a class="nav-link Create" href="{% url 'create' %}">Create</a>
+      </li>
+      {% endif %}
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link view" href="{% url 'view' %}">View</a>
+      </li>
+      {% endif %}
+      {% if user.is_superuser %}
+      <li class="nav-item">
+        <a class="nav-link update" href="{% url 'update_view' %}">Update</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link delete" href="{% url 'delete_view' %}">Delete</a>
+      </li>
+      {% endif %}
+      {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link logout" href="{% url 'logout_confirm' %}">Logout</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link register" href="{% url 'register_user' %}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link login" href="{% url 'login_user' %}">Login</a>
+        </li>
+      {% endif %}
+      {% if user.is_authenticated %}
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Download
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'emp_txt' %}">Download .txt file</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'emp_csv' %}">Download .csv file</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'emp_pdf' %}">Download .pdf file</a>
+        </div>
+      </div>
+      {% endif %}
+
+    </ul>
+    {% if user.is_authenticated %}
+    <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'search_emp' %}">
+      {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Search employee" aria-label="Search" name="searched">
+      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    {% endif %}
+  </div>
+</nav>
+
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark">
+  <a class = 'navbar-brand' href="/">© Chandan R</a>
+</nav>

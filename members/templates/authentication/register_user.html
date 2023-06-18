@@ -1,0 +1,21 @@
+{% extends 'empcrud/base_django.html' %}
+{% block title %}Register a user{% endblock %}
+{% block body %}
+{% if form.errors %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        There was an error in the form
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+{% endif %}
+<center><h4>Registration form</h4></center>
+<div class="shadow p-4 mb-5 bg-body rounded" style="background-color: #ffffff;">
+<form action="{% url 'register_user' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button type="submit" class="btn btn-outline-success btn-sm">Register</button></a>
+</form>
+</div>
+{% endblock %}

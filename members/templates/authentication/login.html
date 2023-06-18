@@ -1,0 +1,26 @@
+{% extends 'empcrud/base_django.html' %}
+{% block title %}Login website{% endblock %}
+{% block body %}
+<center>
+      <p><h4>Login</h4></p>
+      </center>
+<div class="shadow p-4 mb-5 bg-body rounded" style="background-color: #ffffff;">
+<form method="post" action="">
+      {% csrf_token %}
+      <form>
+        <div class="form-group col-md-6">
+          <label for="username" class="form-label">Enter Username</label>
+          <input type="text" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Username">
+<!--          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+        </div>
+        <div class="form-group col-md-6">
+            <label for="password">Enter Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password">
+            <br>
+            <button type="submit" class="btn btn-outline-success btn-sm" name="Save">Login</button>
+        </div>
+
+      </form>
+</form>
+</div>
+{% endblock %}

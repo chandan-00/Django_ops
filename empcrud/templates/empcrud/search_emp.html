@@ -1,0 +1,41 @@
+{% extends 'empcrud/base_django.html' %}
+{% block title %}Search results{% endblock %}
+{% block body %}
+    <center>
+            {% if searched %}
+                <div>
+                    <h1>Hey you searched for '{{ searched }}'</h1><br>
+                    <div class="shadow p-4 mb-5 bg-body rounded" style="background-color: #ffffff;">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <td align="center" scope="col"><b>Employee ID</b></td>
+                                    <td align="center" scope="col"><b>Name</b></td>
+                                    <td align="center" scope="col"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for employee in emp %}
+                                    <tr>
+                                        <td align="center">{{ employee.empid }}</td>
+                                        <td align="center">{{ employee.name }}</td>
+                                        <td align="center"><div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{% url 'index' employee.empid %}"><button type="button" class="btn btn-outline-success btn-sm">View</button></a>&nbsp;
+                                            {% if user.is_superuser %}
+                                            <a href="{% url 'update' employee.empid %}"><button type="button" class="btn btn-outline-warning btn-sm">Update</button></a>&nbsp;
+                                            <a href="{% url 'delete' employee.empid %}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a>
+                                            {% endif %}
+                                        </div></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <div class="shadow p-4 mb-5 bg-body rounded" style="background-color: #ffffff;">
+                            <h4>You forgot to enter the name of employee</h4>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+    </center>
+{% endblock %}

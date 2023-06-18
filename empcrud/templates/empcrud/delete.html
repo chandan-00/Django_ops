@@ -1,0 +1,14 @@
+{% extends 'empcrud/base_django.html' %}
+{% block title %}Delete details{% endblock %}
+{% block body %}
+    <div class="main">
+        <div class="shadow p-4 mb-5 bg-body rounded" style="background-color: #ffffff;">
+        <form method="POST">
+            {% csrf_token %}
+            <p>Are you sure you want to delete {{ emp.name }}'s details ?</p>
+            <input type="submit" class="btn btn-outline-danger btn-sm" value="Delete">
+            <a href="{% url 'view' %}"><button type="button" class="btn btn-outline-secondary btn-sm">Cancel </button></a>
+        </form>
+        </div>
+    </div>
+{% endblock %}

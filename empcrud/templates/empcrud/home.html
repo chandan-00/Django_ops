@@ -1,0 +1,25 @@
+{% extends 'empcrud/base_django.html' %}
+{% load static %}
+{% block title %}Chandan's website{% endblock %}
+{% block body %}
+    <div class="shadow p-4 mb-5 bg-body rounded" style="background-color: #ffffff;">
+        <center>
+            {% if not user.is_authenticated %}
+                <h3>Welcome to company portal<br>
+                Login to view details of employees</h3>
+            {% endif %}
+            {% if user.is_authenticated %}
+                {% if not user.is_superuser %}
+                <h3>Welcome to company portal {{ user }}<br>
+                    Click on view to check list of all employees</h3>
+                {% else %}
+                    <h3>Welcome to company portal {{ user }}<br>
+                    Click on create to add details of a new employee<br>
+                    Click on view to check list of all employees<br>
+                    Click on update to change details of employee<br>
+                    Click on delete to delete employee details</h3>
+                {% endif %}
+            {% endif %}
+        </center>
+    </div>
+{% endblock %}

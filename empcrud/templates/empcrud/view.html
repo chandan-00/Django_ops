@@ -1,0 +1,66 @@
+{% extends 'empcrud/base_django.html' %}
+{% block title %}Details of all employees{% endblock %}
+{% block body %}
+
+    <center>
+    <!--    <div class="w-100 p-3" style="background-color: #eee;">-->
+    <!--        <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">EMPLOYEE LIST-->
+    <!--        </button>-->
+    <!--            {% for list in ls %}-->
+    <!--                    <div class="collapse" id="collapseExample">-->
+    <!--                        <ul class="list-group">-->
+    <!--                            <li class="list-group-item">-->
+    <!--                                <a href="{{list.empid}}/">Employee ID: {{list.empid}}<br> Name : {{list.name}}</a>-->
+    <!--                            </li>-->
+    <!--                        </ul>-->
+    <!--                    </div>-->
+    <!--            {% endfor %}-->
+    <!--    </div>-->
+        <div class="shadow p-4 mb-5 bg-body rounded" style="background-color: #ffffff;">
+        <h1>Here is the list of all employees</h1><br>
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                          <td align="center" scope="col"><b>Employee ID</b></td>
+                          <td align="center" scope="col"><b>Name</b></td>
+                            <td align="center" scope="col"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for employee in search_page %}
+                            <tr>
+                                <td align="center">{{ employee.empid }}</td>
+                                <td align="center">{{ employee.name }}</td>
+                                <td align="center"><div class="btn-group" role="group" aria-label="Basic example">
+                                    {% if user.is_authenticated %}
+                                    <a href="{% url 'index' employee.empid %}"><button type="button" class="btn btn-outline-success btn-sm">View</button></a>&nbsp;
+                                    {% if user.is_superuser %}
+                                    <a href="{% url 'update' employee.empid %}"><button type="button" class="btn btn-outline-warning btn-sm">Update</button></a>&nbsp;
+                                    <a href="{% url 'delete' employee.empid %}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a>
+                                    {% endif %}
+                                    {% endif %}
+                                </div></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        <br><br>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-md-center">
+            <!--    {% if search_page.has_previous %}-->
+            <!--        <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a>-->
+            <!--        <li class="page-item"><a class="page-link" href="?page={{ search_page.previous_page_number }}">Previous</a>-->
+            <!--    {% endif %}-->
+                    {% for i in nums %}
+                    <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                    {% endfor %}
+            <!--    {% if search_page.has_next %}-->
+            <!--        <li class="page-item"><a class="page-link" href="?page={{ search_page.next_page_number }}">Next</a></li>-->
+            <!--        <li class="page-item"><a class="page-link" href="?page={{ search_page.paginator.num_pages }}">Last &raquo</a></li>-->
+            <!--    {% endif %}-->
+                </ul>
+                    <b>Page {{ search_page.number }} of {{ search_page.paginator.num_pages }}</b>
+            </nav>
+        </div>
+    </center>
+{% endblock %}

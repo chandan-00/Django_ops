@@ -1,0 +1,11 @@
+{% extends 'empcrud/base_django.html' %}
+{% block title %}Update details{% endblock %}
+{% block body %}
+    <div class="shadow p-4 mb-5 bg-body rounded" style="background-color: #ffffff;">
+        <form method="post" action="">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-outline-warning btn-sm" name="Update">Update</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'empcrud/base_django.html' %}
+{% block title %}Create new employee{% endblock %}
+{% block body %}
+      <div class="shadow p-4 mb-5 bg-body rounded" style="background-color: #ffffff;">
+            <form method="post" action="/create/" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{form.as_p}}
+                  <button type="submit" class="btn btn-outline-success btn-sm" name="Save">Create new</button>
+                  <a href="{% url 'home' %}"><button type="button" class="btn btn-outline-secondary btn-sm">Cancel </button></a>
+            </form>
+      </div>
+{% endblock %}

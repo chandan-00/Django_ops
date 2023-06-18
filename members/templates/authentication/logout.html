@@ -1,0 +1,18 @@
+{% extends 'empcrud/base_django.html' %}
+{% block title %}Logout website{% endblock %}
+{% block body %}
+<div class="shadow p-4 mb-5 bg-body rounded" style="background-color: #ffffff;">
+<form method="POST">
+        {% csrf_token %}
+        Are you sure you want to logout?<br><br>
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <a href="{% url 'logout_user' %}"><button type="button" class="btn btn-outline-danger btn-sm">Logout</button></a>
+            </div>
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <a href="{% url 'home' %}"><button type="button" class="btn btn-outline-secondary btn-sm">Cancel</button></a>
+            </div>
+        </div>
+</form>
+</div>
+{% endblock %}
