@@ -1,9 +1,1 @@
-# PycharmProjects
-
-A company portal has been created using django
-
-Here a person can view the list of all employees
-
-User authentication has been used to give access to viewing 
-
-Only admins can create, update and delete details of employees
+This project is a Django-based company portal that manages employee information. It features user authentication for secure access, allowing regular users to view the list of employees, while only administrators have permissions to create, update, or delete employee details.
